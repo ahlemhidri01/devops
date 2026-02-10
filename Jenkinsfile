@@ -12,14 +12,15 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Construction du projet avec Maven...'
-                bat 'mvnw.cmd clean package -DskipTests'
+                sh 'chmod +x mvnw'
+                sh './mvnw clean package -DskipTests'
             }
         }
         
         stage('Test') {
             steps {
                 echo 'Exécution des tests...'
-                bat 'mvnw.cmd test'
+                sh './mvnw test'
             }
         }
         
