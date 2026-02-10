@@ -11,25 +11,37 @@ pipeline {
         
         stage('Build') {
             steps {
-                echo 'Construction du projet...'
-                // Ajoutez vos commandes de build
+                echo 'Construction du projet avec Maven...'
+                sh 'chmod +x mvnw'
+                sh './mvnw clean package -DskipTests'
             }
         }
         
         stage('Test') {
             steps {
                 echo 'Exécution des tests...'
-                // Ajoutez vos commandes de test
+                sh './mvnw test'
+            }
+        }
+        
+        stage('Archive') {
+            steps {
+                echo 'Archivage de l\'artifact...'
+                archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
             }
         }
     }
     
     post {
         success {
-            echo 'Pipeline exécuté avec succès!'
+            echo 'Pipeline exécuté avec succès! ✅'
         }
         failure {
-            echo 'Le pipeline a échoué.'
+            echo 'Le pipeline a échoué. ❌'
+        }
+        always {
+            echo 'Nettoyage du workspace...'
+            cleanWs()
         }
     }
 }
