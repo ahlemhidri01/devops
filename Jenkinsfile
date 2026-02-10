@@ -15,7 +15,10 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean package -Dmaven.test.skip=true'
+                sh '''
+                export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED"
+                mvn clean package -Dmaven.test.skip=true
+                '''
             }
         }
     }
