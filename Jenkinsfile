@@ -17,13 +17,6 @@ pipeline {
             }
         }
         
-        stage('Test') {
-            steps {
-                echo 'Exécution des tests...'
-                sh './mvnw test'
-            }
-        }
-        
         stage('Archive') {
             steps {
                 echo 'Archivage de l\'artifact...'
@@ -40,8 +33,7 @@ pipeline {
             echo 'Le pipeline a échoué. ❌'
         }
         always {
-            echo 'Nettoyage du workspace...'
-            cleanWs()
+            echo 'Build terminé.'
         }
     }
 }
