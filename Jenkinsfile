@@ -2,22 +2,34 @@ pipeline {
     agent any
     
     stages {
-        stage('Checkout') {
+        
+        stage('GIT') {
             steps {
-                
+                echo "Getting Project from Git"
                 git branch: 'main', url: 'https://github.com/ahlemhidri01/devops.git'
             }
         }
         
-        stage('Build') {
+        stage('MVN CLEAN') {
             steps {
-                echo 'Construction du projet avec Maven Wrapper...'
                 sh 'chmod +x mvnw'
-                sh './mvnw clean package -DskipTests'
+                sh './mvnw clean'
             }
         }
         
+        stage('MVN COMPILE') {
+            steps {
+                sh './mvnw compile'
+            }
+        }
         
+        stage('MVN SONARQUBE') {
+            steps {
+                sh './mvnw sonar:sonar \
+                    -Dsonar.host.url=http://192.168.50.4:9000 \
+                    -Dsonar.login=admin \
+                    -Dsonar.password=sonar'
+            }
+        }
     }
-    
 }
