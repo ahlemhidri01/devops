@@ -24,12 +24,11 @@ pipeline {
         }
         
         stage('MVN SONARQUBE') {
-            steps {
-                sh './mvnw sonar:sonar \
-                    -Dsonar.host.url=http://192.168.50.4:9000 \
-                    -Dsonar.login=admin \
-                    -Dsonar.password=sonar'
-            }
-        }
+    steps {
+        sh './mvnw sonar:sonar \
+            -Dsonar.host.url=http://192.168.50.4:9000 \
+            -Dsonar.login=c2d55787c11a8c722a789e39166eb0db22ab2ddf'
+    }
+}
     }
 }
