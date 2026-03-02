@@ -1,15 +1,12 @@
 package tn.esprit.studentmanagement;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+@SpringBootApplication
+public class StudentManagementApplication {
 
-@SpringBootTest
-class StudentManagementApplicationTests {
-
-    @Test
-    void contextLoads() {
-        assertTrue(true, "Context loads successfully");
+    public static void main(String[] args) {
+        SpringApplication.run(StudentManagementApplication.class, args);
     }
 }
